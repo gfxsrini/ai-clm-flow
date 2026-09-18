@@ -14,6 +14,8 @@ Then visit `http://localhost:4173`.
 
 Use the **Prototype pages** menu in the top-right corner to open any screen directly. The sidebar items also navigate to working prototype pages.
 
+When any Contract Manager flow screen is open, the fixed **Previous / Next** controller at the bottom shows the current Figma node and provides a guaranteed path through all seven supplied frames.
+
 Direct routes are available through URL hashes:
 
 - `#dashboard`

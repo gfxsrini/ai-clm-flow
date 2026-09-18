@@ -53,17 +53,22 @@
         <details class="prototype-menu" id="prototypeMenu">
           <summary>Prototype pages</summary>
           <div class="prototype-menu-list">
-            <button data-route="dashboard">1. Dashboard</button>
-            <button data-route="dashboard-entered">2. Entered request</button>
-            <button data-route="review">3. Review request</button>
-            <button data-route="overview">4. Review + overview</button>
-            <button data-route="documents">5. Add documents</button>
-            <button data-route="confirm">6. Confirm submission</button>
-            <button data-route="sent">7. Procurement status</button>
-            <button data-route="edit">8. Edit request</button>
+            <button data-route="dashboard">Home dashboard</button>
+            <button data-route="dashboard-entered">1. Prompt entered · 272:5233</button>
+            <button data-route="review">2. Review request · 272:5427</button>
+            <button data-route="overview">3. Expanded overview · 299:1245</button>
+            <button data-route="documents">4. Add documents · 272:5955</button>
+            <button data-route="confirm">5. Send confirmation · 272:6273</button>
+            <button data-route="sent">6. Request sent · 272:6606</button>
+            <button data-route="edit">7. Edit information · 341:7873</button>
           </div>
         </details>
         <div id="appView"></div>
+        <nav class="flow-controls" id="flowControls" aria-label="Contract Manager prototype flow" hidden>
+          <button id="previousScreen" aria-label="Previous prototype screen">← Previous</button>
+          <span><b id="flowCount"></b><small id="flowName"></small></span>
+          <button id="nextScreen" aria-label="Next prototype screen">Next →</button>
+        </nav>
       </main>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
