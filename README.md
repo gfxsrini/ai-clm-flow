@@ -12,6 +12,19 @@ python3 -m http.server 4173
 
 Then visit `http://localhost:4173`.
 
+Use the **Prototype pages** menu in the top-right corner to open any screen directly. The sidebar items also navigate to working prototype pages.
+
+Direct routes are available through URL hashes:
+
+- `#dashboard`
+- `#dashboard-entered`
+- `#review`
+- `#overview`
+- `#documents`
+- `#confirm`
+- `#sent`
+- `#edit`
+
 ## Prototype interactions
 
 - Dashboard and populated conversational request states

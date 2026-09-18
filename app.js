@@ -10,7 +10,12 @@ function showToast(message){toast.textContent=message;toast.classList.add('show'
 function icon(name,cls=''){return `<img class="${cls}" src="assets/${name}.png" alt="">`}
 function docGlyph(){return `<span class="doc-glyph">${icon('contracts')}</span>`}
 function statusChip(type,text){return `<span class="status-chip ${type}">${text}</span>`}
-function go(screen,options={}){state.screen=screen;if('overview'in options)state.overview=options.overview;render();window.scrollTo({top:0,behavior:'smooth'})}
+function routeForState(){if(state.screen==='dashboard-typed')return'dashboard-entered';if(state.screen==='review'&&state.overview)return'overview';return state.screen}
+function applyRoute(route){
+ const routes={dashboard:['dashboard',false],'dashboard-entered':['dashboard-typed',false],review:['review',false],overview:['review',true],documents:['documents',true],confirm:['confirm',true],sent:['sent',true],edit:['edit',true]};
+ const selected=routes[route]||routes.dashboard;state.screen=selected[0];state.overview=selected[1];if(state.screen==='dashboard-typed'&&!state.prompt)state.prompt='Review supplier request REQ-2026-0187';render();
+}
+function go(screen,options={}){state.screen=screen;if('overview'in options)state.overview=options.overview;const route=routeForState();if(location.hash!==`#${route}`)history.pushState({route},'',`#${route}`);render();window.scrollTo({top:0,behavior:'smooth'})}
 
 function dashboardTemplate(){
  const typed=state.screen==='dashboard-typed';
@@ -103,6 +108,7 @@ function render(){
  if(state.screen==='confirm')appView.innerHTML=confirmTemplate();
  if(state.screen==='sent')appView.innerHTML=sentTemplate();
  if(state.screen==='edit')appView.innerHTML=editTemplate();
+ document.querySelectorAll('#prototypeMenu [data-route]').forEach(button=>button.classList.toggle('active',button.dataset.route===routeForState()));
 }
 
 appView.addEventListener('input',event=>{if(event.target.id==='promptInput'){state.prompt=event.target.value;const button=appView.querySelector('.composer .send-button');button.disabled=!state.prompt.trim();appView.querySelector('.composer').classList.add('focused')}});
@@ -128,11 +134,14 @@ document.querySelector('#collapseButton').addEventListener('click',()=>sidebar.c
 document.querySelector('#mobileMenu').addEventListener('click',()=>sidebar.classList.toggle('mobile-open'));
 document.querySelector('#newChatButton').addEventListener('click',()=>{state.prompt='';state.overview=false;go('dashboard');showToast('New conversation started')});
 document.querySelector('#brandHome').addEventListener('click',()=>{state.overview=false;go('dashboard')});
+document.querySelector('#prototypeMenu').addEventListener('click',event=>{const button=event.target.closest('[data-route]');if(!button)return;applyRoute(button.dataset.route);history.pushState({route:button.dataset.route},'',`#${button.dataset.route}`);document.querySelector('#prototypeMenu').removeAttribute('open');window.scrollTo({top:0,behavior:'smooth'})});
 document.querySelector('#searchButton').addEventListener('click',()=>{const box=document.querySelector('#searchBox');box.hidden=!box.hidden;if(!box.hidden)document.querySelector('#recentSearch').focus()});
 document.querySelector('#recentsToggle').addEventListener('click',event=>{const expanded=event.currentTarget.getAttribute('aria-expanded')==='true';event.currentTarget.setAttribute('aria-expanded',String(!expanded));document.querySelector('#recentList').hidden=expanded});
 document.querySelector('#recentSearch').addEventListener('input',event=>{const value=event.target.value.toLowerCase();document.querySelectorAll('.recent-item').forEach(item=>item.hidden=!item.dataset.request.toLowerCase().includes(value))});
 document.querySelectorAll('.recent-item').forEach(item=>item.addEventListener('click',()=>{document.querySelectorAll('.recent-item').forEach(x=>x.classList.remove('selected'));item.classList.add('selected');if(item.dataset.request==='REQ-2026-0187')go('review');else{state.prompt=`Show me the latest status for ${item.dataset.request}`;go('dashboard-typed')}sidebar.classList.remove('mobile-open')}));
-document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));item.classList.add('active');showToast(`${item.dataset.section} selected`)}));
+const sidebarRoutes={Approvals:'review',Contracts:'documents','My requests':'sent',Supplier:'confirm',Insights:'edit'};
+document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));item.classList.add('active');applyRoute(sidebarRoutes[item.dataset.section]);history.pushState({route:sidebarRoutes[item.dataset.section]},'',`#${sidebarRoutes[item.dataset.section]}`);sidebar.classList.remove('mobile-open')}));
 document.addEventListener('click',event=>{if(innerWidth<=760&&sidebar.classList.contains('mobile-open')&&!sidebar.contains(event.target)&&!event.target.closest('#mobileMenu'))sidebar.classList.remove('mobile-open')});
 
-render();
+window.addEventListener('popstate',()=>applyRoute(location.hash.slice(1)||'dashboard'));
+applyRoute(location.hash.slice(1)||'dashboard');
