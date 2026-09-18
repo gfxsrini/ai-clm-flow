@@ -15,50 +15,50 @@
       <aside class="sidebar" id="sidebar">
         <header class="brand-row">
           <div class="brand">
-            <img src="https://www.figma.com/api/mcp/asset/04a56.svg" alt="Société Générale" />
+            <img src="assets/logo.png" alt="Société Générale" />
             <span>Contract Lifecycle Management</span>
           </div>
           <div class="header-actions">
             <button class="icon-button" id="searchButton" aria-label="Search recent conversations">
-              <img src="https://www.figma.com/api/mcp/asset/d2212.svg" alt="" />
+              <img src="assets/search.png" alt="" />
             </button>
             <button class="icon-button" id="collapseButton" aria-label="Collapse sidebar">
-              <img src="https://www.figma.com/api/mcp/asset/8a627.svg" alt="" />
+              <img src="assets/collapse.png" alt="" />
             </button>
           </div>
         </header>
 
         <button class="new-chat" id="newChatButton">
-          <img src="https://www.figma.com/api/mcp/asset/8d135.svg" alt="" />
+          <span class="plus-crop" aria-hidden="true"><img src="assets/new-chat.png" alt="" /></span>
           <span>New chat</span>
         </button>
 
         <nav class="primary-nav" aria-label="Primary navigation">
           <button class="nav-item" data-view="Approvals">
-            <img src="https://www.figma.com/api/mcp/asset/05954.svg" alt="" />
+            <img src="assets/approvals.png" alt="" />
             <span>Approvals</span><strong>2</strong>
           </button>
           <button class="nav-item" data-view="Contracts">
-            <img src="https://www.figma.com/api/mcp/asset/3ff97.svg" alt="" />
+            <img src="assets/contracts.png" alt="" />
             <span>Contracts</span>
           </button>
           <button class="nav-item" data-view="My requests">
-            <img src="https://www.figma.com/api/mcp/asset/4a6c7.svg" alt="" />
+            <img src="assets/requests.png" alt="" />
             <span>My requests</span>
           </button>
           <button class="nav-item" data-view="Supplier">
-            <img src="https://www.figma.com/api/mcp/asset/239c1.svg" alt="" />
+            <img src="assets/supplier.png" alt="" />
             <span>Supplier</span>
           </button>
           <button class="nav-item" data-view="Insights">
-            <img src="https://www.figma.com/api/mcp/asset/7b124.svg" alt="" />
+            <img src="assets/insight.png" alt="" />
             <span>Insights</span>
           </button>
         </nav>
 
         <section class="recents">
           <button class="section-label" id="recentsToggle" aria-expanded="true">
-            <img src="https://www.figma.com/api/mcp/asset/3a2f2.svg" alt="" />
+            <img src="assets/down.png" alt="" />
             <span>Recents</span>
           </button>
           <div class="search-box" id="searchBox" hidden>
@@ -74,7 +74,7 @@
         </section>
 
         <footer class="profile">
-          <div class="avatar"><img src="https://www.figma.com/api/mcp/asset/5030c.svg" alt="" /></div>
+          <div class="avatar"><img src="assets/profile.png" alt="" /></div>
           <span><b>Catherine Moreau</b><small>Contract Manager</small></span>
           <button class="more" aria-label="Profile options">•••</button>
         </footer>
@@ -94,12 +94,12 @@
             <textarea id="promptInput" rows="3" placeholder='Tell me what you need, e.g. "Review supplier request REQ-2026-0187"'></textarea>
             <div class="composer-actions">
               <button type="button" class="attach-button" id="attachButton" aria-label="Attach documents">
-                <img src="https://www.figma.com/api/mcp/asset/99a0a.svg" alt="" />
+                <img src="assets/attachment.png" alt="" />
               </button>
               <input type="file" id="fileInput" hidden multiple />
               <span class="file-status" id="fileStatus"></span>
               <button type="submit" class="send-button" id="sendButton" aria-label="Send question" disabled>
-                <img src="https://www.figma.com/api/mcp/asset/6443c.svg" alt="" />
+                <img src="assets/send.png" alt="" />
               </button>
             </div>
           </form>
@@ -110,19 +110,19 @@
             <h2 id="suggestionsTitle">Suggested starts</h2>
             <div class="suggestion-grid">
               <button class="suggestion-card" data-prompt="Review supplier request REQ-2026-0187">
-                <span class="suggestion-icon"><img src="https://www.figma.com/api/mcp/asset/cc71e.svg" alt="" /></span>
+                <span class="suggestion-icon"><img src="assets/review.png" alt="" /></span>
                 <b>Review supplier requests</b><span class="arrow">›</span>
               </button>
               <button class="suggestion-card" data-prompt="Follow up on missing contract information">
-                <span class="suggestion-icon"><img src="https://www.figma.com/api/mcp/asset/6f8af.svg" alt="" /></span>
+                <span class="suggestion-icon card-icon followup-icon"><img src="assets/followup-card.png" alt="" /></span>
                 <b>Follow up on information</b><span class="arrow">›</span>
               </button>
               <button class="suggestion-card" data-prompt="Renew or extend a contract">
-                <span class="suggestion-icon"><img src="https://www.figma.com/api/mcp/asset/31625.svg" alt="" /></span>
+                <span class="suggestion-icon card-icon renew-icon"><img src="assets/renew-card.png" alt="" /></span>
                 <b>Renew or extend a contract</b><span class="arrow">›</span>
               </button>
               <button class="suggestion-card" data-prompt="Amend an existing contract">
-                <span class="suggestion-icon"><img src="https://www.figma.com/api/mcp/asset/e1891.svg" alt="" /></span>
+                <span class="suggestion-icon card-icon amend-icon"><img src="assets/amend-card.png" alt="" /></span>
                 <b>Amend an existing contract</b><span class="arrow">›</span>
               </button>
             </div>

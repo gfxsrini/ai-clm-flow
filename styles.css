@@ -27,6 +27,8 @@ button { border: 0; cursor: pointer; }
 .icon-button { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 7px; background: transparent; }
 .icon-button:hover, .nav-item:hover, .recent-item:hover, .section-label:hover { background: var(--sidebar-hover); }
 .icon-button img, .new-chat img, .nav-item img { width: 18px; height: 18px; }
+.plus-crop { position: relative; width: 18px; height: 18px; flex: 0 0 auto; overflow: hidden; }
+.plus-crop img { position: absolute; top: -11px; left: -8px; width: 240px; height: 40px; max-width: none; }
 
 .new-chat { display: flex; width: 240px; height: 40px; align-items: center; gap: 8px; padding: 0 8px; border-radius: 8px; color: #fff; background: var(--sidebar-hover); text-align: left; }
 .primary-nav { display: flex; width: 240px; flex-direction: column; gap: 4px; }
@@ -84,6 +86,8 @@ button { border: 0; cursor: pointer; }
 .suggestion-card:hover { transform: translateY(-2px); border-color: #d1d1d1; box-shadow: 0 8px 18px rgba(18,18,20,.07); }
 .suggestion-icon { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border-radius: 8px; background: #f4f4f5; }
 .suggestion-icon img { width: 20px; height: 20px; }
+.suggestion-icon.card-icon { position: relative; overflow: hidden; }
+.suggestion-icon.card-icon img { position: absolute; top: -27px; left: -26px; width: 258px; height: 74px; max-width: none; }
 .suggestion-card b { flex: 1; font-size: 13px; line-height: 18px; }
 .arrow { color: #71717a; font-size: 21px; font-weight: 400; }
 .activity h2 { margin: 0 0 16px; font-size: 15px; line-height: 20px; }
