@@ -109,9 +109,13 @@ function render(){
  if(state.screen==='sent')appView.innerHTML=sentTemplate();
  if(state.screen==='edit')appView.innerHTML=editTemplate();
  document.querySelectorAll('#prototypeMenu [data-route]').forEach(button=>button.classList.toggle('active',button.dataset.route===routeForState()));
+ if(state.screen==='dashboard-typed')requestAnimationFrame(()=>{const input=document.querySelector('#promptInput');if(!input)return;input.focus({preventScroll:true});input.setSelectionRange(input.value.length,input.value.length)});
 }
 
-appView.addEventListener('input',event=>{if(event.target.id==='promptInput'){state.prompt=event.target.value;const button=appView.querySelector('.composer .send-button');button.disabled=!state.prompt.trim();appView.querySelector('.composer').classList.add('focused')}});
+appView.addEventListener('focusin',event=>{if(event.target.id==='promptInput')appView.querySelector('.composer')?.classList.add('focused')});
+appView.addEventListener('focusout',event=>{if(event.target.id==='promptInput'&&!event.target.value.trim())appView.querySelector('.composer')?.classList.remove('focused')});
+appView.addEventListener('input',event=>{if(event.target.id==='promptInput'){state.prompt=event.target.value;const hasText=Boolean(state.prompt.trim());state.screen=hasText?'dashboard-typed':'dashboard';const button=appView.querySelector('.composer .send-button');button.disabled=!hasText;appView.querySelector('.composer').classList.toggle('focused',hasText||document.activeElement===event.target);const route=hasText?'dashboard-entered':'dashboard';history.replaceState({route},'',`#${route}`);document.querySelectorAll('#prototypeMenu [data-route]').forEach(item=>item.classList.toggle('active',item.dataset.route===route))}});
+appView.addEventListener('keydown',event=>{if(event.target.id==='promptInput'&&event.key==='Enter'&&!event.shiftKey){event.preventDefault();if(event.target.value.trim())event.target.form.requestSubmit()}});
 appView.addEventListener('submit',event=>{event.preventDefault();if(event.target.id==='dashboardComposer'){if(document.querySelector('#promptInput').value.trim())go('review')}else if(event.target.id==='bottomComposer'){showToast('Message added to the request')}});
 appView.addEventListener('click',event=>{const target=event.target.closest('[data-action]');if(!target)return;const action=target.dataset.action;
  if(action==='suggest'){state.prompt=target.dataset.prompt;go('dashboard-typed');setTimeout(()=>document.querySelector('#promptInput')?.focus(),0)}
