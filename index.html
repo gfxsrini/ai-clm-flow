@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AI-enabled Contract Lifecycle Management prototype" />
+    <meta name="description" content="AI-enabled Contract Lifecycle Management interactive prototype" />
     <title>Contract Lifecycle Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,131 +14,43 @@
     <div class="app-shell">
       <aside class="sidebar" id="sidebar">
         <header class="brand-row">
-          <div class="brand">
+          <button class="brand" id="brandHome" aria-label="Go to dashboard">
             <img src="assets/logo.png" alt="Société Générale" />
             <span>Contract Lifecycle Management</span>
-          </div>
+          </button>
           <div class="header-actions">
-            <button class="icon-button" id="searchButton" aria-label="Search recent conversations">
-              <img src="assets/search.png" alt="" />
-            </button>
-            <button class="icon-button" id="collapseButton" aria-label="Collapse sidebar">
-              <img src="assets/collapse.png" alt="" />
-            </button>
+            <button class="icon-button" id="searchButton" aria-label="Search recent conversations"><img src="assets/search.png" alt="" /></button>
+            <button class="icon-button" id="collapseButton" aria-label="Collapse sidebar"><img src="assets/collapse.png" alt="" /></button>
           </div>
         </header>
-
-        <button class="new-chat" id="newChatButton">
-          <span class="plus-crop" aria-hidden="true"><img src="assets/new-chat.png" alt="" /></span>
-          <span>New chat</span>
-        </button>
-
+        <button class="new-chat" id="newChatButton"><span class="plus-crop" aria-hidden="true"><img src="assets/new-chat.png" alt="" /></span><span>New chat</span></button>
         <nav class="primary-nav" aria-label="Primary navigation">
-          <button class="nav-item" data-view="Approvals">
-            <img src="assets/approvals.png" alt="" />
-            <span>Approvals</span><strong>2</strong>
-          </button>
-          <button class="nav-item" data-view="Contracts">
-            <img src="assets/contracts.png" alt="" />
-            <span>Contracts</span>
-          </button>
-          <button class="nav-item" data-view="My requests">
-            <img src="assets/requests.png" alt="" />
-            <span>My requests</span>
-          </button>
-          <button class="nav-item" data-view="Supplier">
-            <img src="assets/supplier.png" alt="" />
-            <span>Supplier</span>
-          </button>
-          <button class="nav-item" data-view="Insights">
-            <img src="assets/insight.png" alt="" />
-            <span>Insights</span>
-          </button>
+          <button class="nav-item" data-section="Approvals"><img src="assets/approvals.png" alt="" /><span>Approvals</span><strong>2</strong></button>
+          <button class="nav-item" data-section="Contracts"><img src="assets/contracts.png" alt="" /><span>Contracts</span></button>
+          <button class="nav-item" data-section="My requests"><img src="assets/requests.png" alt="" /><span>My requests</span></button>
+          <button class="nav-item" data-section="Supplier"><img src="assets/supplier.png" alt="" /><span>Supplier</span></button>
+          <button class="nav-item" data-section="Insights"><img src="assets/insight.png" alt="" /><span>Insights</span></button>
         </nav>
-
         <section class="recents">
-          <button class="section-label" id="recentsToggle" aria-expanded="true">
-            <img src="assets/down.png" alt="" />
-            <span>Recents</span>
-          </button>
-          <div class="search-box" id="searchBox" hidden>
-            <input id="recentSearch" type="search" placeholder="Search conversations" aria-label="Search conversations" />
-          </div>
+          <button class="section-label" id="recentsToggle" aria-expanded="true"><img src="assets/down.png" alt="" /><span>Recents</span></button>
+          <div class="search-box" id="searchBox" hidden><input id="recentSearch" type="search" placeholder="Search conversations" aria-label="Search conversations" /></div>
           <div class="recent-list" id="recentList">
-            <button class="recent-item" data-title="REQ-2026-0187"><span class="bubble">○</span><span><b>REQ-2026-0187</b><small>Today, 10:24</small></span></button>
-            <button class="recent-item" data-title="Renewal review - Cloud"><span class="bubble">○</span><span><b>Renewal review - Cloud</b><small>Yesterday, 15:10</small></span></button>
-            <button class="recent-item" data-title="Supplier onboarding"><span class="bubble">○</span><span><b>Supplier onboarding</b><small>12 Sep 2026</small></span></button>
-            <button class="recent-item" data-title="Clause clarification"><span class="bubble">○</span><span><b>Clause clarification</b><small>10 Sep 2026</small></span></button>
-            <button class="recent-item" data-title="Risk review - Data privacy"><span class="bubble">○</span><span><b>Risk review - Data privacy</b><small>8 Sep 2026</small></span></button>
+            <button class="recent-item selected" data-request="REQ-2026-0187"><span class="bubble">○</span><span><b>REQ-2026-0187</b><small>Today, 10:24</small></span></button>
+            <button class="recent-item" data-request="Renewal review - Cloud"><span class="bubble">○</span><span><b>Renewal review - Cloud</b><small>Yesterday, 15:10</small></span></button>
+            <button class="recent-item" data-request="Supplier onboarding"><span class="bubble">○</span><span><b>Supplier onboarding</b><small>12 Sep 2026</small></span></button>
+            <button class="recent-item" data-request="Clause clarification"><span class="bubble">○</span><span><b>Clause clarification</b><small>10 Sep 2026</small></span></button>
+            <button class="recent-item" data-request="Risk review - Data privacy"><span class="bubble">○</span><span><b>Risk review - Data privacy</b><small>8 Sep 2026</small></span></button>
           </div>
         </section>
-
         <footer class="profile">
           <div class="avatar"><img src="assets/profile.png" alt="" /></div>
           <span><b>Catherine Moreau</b><small>Contract Manager</small></span>
           <button class="more" aria-label="Profile options">•••</button>
         </footer>
       </aside>
-
-      <main class="workspace">
+      <main class="workspace" id="workspace">
         <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
-        <section class="dashboard" aria-labelledby="pageTitle">
-          <div class="welcome">
-            <span class="brand-accent"></span>
-            <p>Good morning, Catherine</p>
-            <h1 id="pageTitle">What would you like to do today?</h1>
-          </div>
-
-          <form class="composer" id="composer">
-            <label class="sr-only" for="promptInput">Ask the contract assistant</label>
-            <textarea id="promptInput" rows="3" placeholder='Tell me what you need, e.g. "Review supplier request REQ-2026-0187"'></textarea>
-            <div class="composer-actions">
-              <button type="button" class="attach-button" id="attachButton" aria-label="Attach documents">
-                <img src="assets/attachment.png" alt="" />
-              </button>
-              <input type="file" id="fileInput" hidden multiple />
-              <span class="file-status" id="fileStatus"></span>
-              <button type="submit" class="send-button" id="sendButton" aria-label="Send question" disabled>
-                <img src="assets/send.png" alt="" />
-              </button>
-            </div>
-          </form>
-
-          <div class="assistant-response" id="assistantResponse" hidden aria-live="polite"></div>
-
-          <section class="suggestions" aria-labelledby="suggestionsTitle">
-            <h2 id="suggestionsTitle">Suggested starts</h2>
-            <div class="suggestion-grid">
-              <button class="suggestion-card" data-prompt="Review supplier request REQ-2026-0187">
-                <span class="suggestion-icon"><img src="assets/review.png" alt="" /></span>
-                <b>Review supplier requests</b><span class="arrow">›</span>
-              </button>
-              <button class="suggestion-card" data-prompt="Follow up on missing contract information">
-                <span class="suggestion-icon card-icon followup-icon"><img src="assets/followup-card.png" alt="" /></span>
-                <b>Follow up on information</b><span class="arrow">›</span>
-              </button>
-              <button class="suggestion-card" data-prompt="Renew or extend a contract">
-                <span class="suggestion-icon card-icon renew-icon"><img src="assets/renew-card.png" alt="" /></span>
-                <b>Renew or extend a contract</b><span class="arrow">›</span>
-              </button>
-              <button class="suggestion-card" data-prompt="Amend an existing contract">
-                <span class="suggestion-icon card-icon amend-icon"><img src="assets/amend-card.png" alt="" /></span>
-                <b>Amend an existing contract</b><span class="arrow">›</span>
-              </button>
-            </div>
-          </section>
-
-          <section class="activity" aria-labelledby="activityTitle">
-            <h2 id="activityTitle">My activity</h2>
-            <div class="metrics">
-              <button class="metric active" data-view="My review tasks"><strong>2</strong><span>My review tasks</span></button>
-              <button class="metric" data-view="Approvals to review"><strong>1</strong><span>Approvals to review</span></button>
-              <button class="metric" data-view="Waiting for my input"><strong>2</strong><span>Waiting for my input</span></button>
-              <button class="metric" data-view="Upcoming renewals"><strong>2</strong><span>Upcoming renewals</span></button>
-              <button class="metric" data-view="Waiting on others"><strong>1</strong><span>Waiting on others</span></button>
-            </div>
-          </section>
-        </section>
+        <div id="appView"></div>
       </main>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
